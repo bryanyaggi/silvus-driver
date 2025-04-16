@@ -3,16 +3,14 @@
 import rospy
 from std_msgs.msg import Int32MultiArray
 
-import numpy as np
+import silvus_driver.rssi_reader as rr
 
-from silvus_driver.rssi_reader import RssiReader
-
-class RssiPublisher(RssiReader):
+class RssiPublisher(rr.RssiReader):
     def __init__(self, ip="192.168.132.15", port=30000):
-        RssiReader.__init__(self, ip, port)
+        rr.RssiReader.__init__(self, ip, port)
         self.pub = rospy.Publisher('rssi', Int32MultiArray, queue_size=10)
         self.msg = Int32MultiArray()
-        self.msg.data = np.zeros(5)
+        self.msg.data = [0] * 5
 
     def run(self):
         self.socket.settimeout(5)
@@ -22,7 +20,7 @@ class RssiPublisher(RssiReader):
             except Exception:
                 print('timeout')
                 continue
-            nodeId, rssi = parsePacket()
+            nodeId, rssi = rr.parsePacket(packet)
             if nodeId != '0':
                 self.msg.data[0] = int(nodeId)
                 self.msg.data[1:] = rssi

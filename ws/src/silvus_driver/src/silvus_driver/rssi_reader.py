@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import numpy as np
 import socket
 import struct
 
@@ -12,7 +11,7 @@ def parsePacket(packet):
     '''
     offset = 0
     nodeId = None
-    rssi = np.zeros(4)
+    rssi = [0] * 4
 
     while offset + 4 <= len(packet):
         # Unpack type and length
@@ -38,7 +37,7 @@ def parsePacket(packet):
                 i = rssiAntennaTypes.index(type_)
             except ValueError:
                 continue
-            rssi[i] = value
+            rssi[i] = int(value)
 
     return nodeId, rssi
 
