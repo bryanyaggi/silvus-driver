@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ros-noetic
-    image: ros-noetic
+    container_name: ros-noetic-silvus
+    image: ros-noetic-silvus
     user: user
     privileged: true
     environment:

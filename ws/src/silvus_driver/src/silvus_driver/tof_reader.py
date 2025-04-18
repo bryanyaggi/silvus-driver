@@ -32,8 +32,9 @@ class ToFReader:
             tof = int(result[i+1])
             age = int(result[i+2])
 
-            current_tof.append((node, tof, age))
+            current_tof.extend((node, tof, age))
         
+        print(current_tof)
         return current_tof
     
     def run(self):
@@ -44,7 +45,3 @@ class ToFReader:
                 print(current_tof)
             except Exception as e:
                 print("Error:", e)
-
-            
-
-
