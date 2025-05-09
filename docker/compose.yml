@@ -13,7 +13,9 @@ services:
       - ROS_IP
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - ../ws:/home/user/ws
+      - ./ws:/home/user/ws
+      - ../:/home/user/ws/src/silvus_driver
+    working_dir: /home/user/ws
     network_mode: host
     ipc: host
     command: ["bash"]

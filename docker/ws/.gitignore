@@ -3,4 +3,5 @@
 build
 devel
 logs
+src
 __pycache__
